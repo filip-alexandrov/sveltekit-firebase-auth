@@ -1,3 +1,18 @@
+<script>
+	import { userStore, isLoggedIn } from '../stores';
+	import { auth } from '../firebase';
+
+	const logout = async () => {
+		try {
+			const res = await auth.signOut();
+			$userStore = {};
+			$isLoggedIn = false;
+		} catch (err) {
+			console.error(err);
+		}
+	};
+</script>
+
 <nav>
 	<ul>
 		<li>
@@ -6,12 +21,15 @@
 		<li>
 			<a href="/profile">Profile</a>
 		</li>
-		<li>
-			<a href="/login">Login</a>
-		</li>
-		<li>
-			<a href="/">Logout</a>
-		</li>
+		{#if $isLoggedIn}
+			<li class="mouse-pointer">
+				<a on:click={logout}>Logout</a>
+			</li>
+		{:else}
+			<li>
+				<a href="/login">Login</a>
+			</li>
+		{/if}
 	</ul>
 </nav>
 
@@ -34,5 +52,8 @@
 	}
 	a:hover {
 		color: green;
+	}
+	.mouse-pointer {
+		cursor: pointer;
 	}
 </style>

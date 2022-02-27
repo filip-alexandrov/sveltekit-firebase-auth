@@ -1,13 +1,13 @@
 <script>
-	import { user, isLoggedIn } from '../stores';
+	import { userStore, isLoggedIn } from '../stores';
 </script>
 
 <h1>Profile</h1>
 {#if $isLoggedIn}
 	<div class="profile">
-		<img width="80" height="80" src={$user.photoURL} alt="user" />
-		<h4>{$user.displayName}</h4>
-		<p>Your email is {$user.email}</p>
+		<img width="80" height="80" src={$userStore.photoURL} alt="user" />
+		<h4>{$userStore.displayName}</h4>
+		<p>Your email is {$userStore.email}</p>
 	</div>
 {/if}
 
